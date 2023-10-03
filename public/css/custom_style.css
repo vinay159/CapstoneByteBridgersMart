@@ -42,3 +42,23 @@ audio, canvas, embed, iframe, img, object, svg, video {
 .mt-16 {
     margin-top: 4rem;
 }
+
+/* home styles */
+
+.navbar-nav .show > .nav-link, .navbar-nav .nav-link.active, .nav-link {
+    color: rgb(255 255 255 / 90%) !important;
+}
+
+.button_cart {
+    color: #fff;
+    border-color: #fff;
+    border-radius: 2px;
+}
+
+.button_cart i {
+    color: #fff;
+}
+
+.button_cart span {
+    color: #000 !important;
+}
