@@ -24,9 +24,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('details', function () {
-//    return view('details');
-//});
+Route::get('details', function () {
+    return view('details');
+})->name('details');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
