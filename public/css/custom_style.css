@@ -23,8 +23,16 @@
     background-color: rgb(40, 53, 59) !important;
 }
 
-.nav-link, .nav-link:hover, .nav-link:focus, .navbar-brand {
+.nav-link, .nav-link:focus, .navbar-brand {
     color: #fff;
+}
+
+.nav-link:hover {
+    color: #ff2d20 !important;
+}
+
+ul.navbar-nav li {
+    margin: 0 30px 0 0;
 }
 
 .w-auto {
@@ -32,7 +40,7 @@
 }
 
 .h-16 {
-    height: 4rem;
+    height: 3rem;
 }
 audio, canvas, embed, iframe, img, object, svg, video {
     display: block;
@@ -50,9 +58,9 @@ audio, canvas, embed, iframe, img, object, svg, video {
 }
 
 .button_cart {
-    color: #fff;
-    border-color: #fff;
-    border-radius: 2px;
+    border: 1px solid #fff !important;
+    color: #fff !important;
+    /*border-radius: 2px;*/
 }
 
 .button_cart i {
@@ -61,4 +69,27 @@ audio, canvas, embed, iframe, img, object, svg, video {
 
 .button_cart span {
     color: #000 !important;
+}
+
+.btn.button_cart:hover {
+    color: var(--bs-btn-hover-color);
+    background-color: #F44336;
+    border-color: #F44336 !important;
+}
+
+/* Home Page */
+.card {
+    border-radius: 4px;
+    padding: 5px !important;
+}
+
+.banner_bg {
+    background-color: #cad2c5;
+}
+
+
+/* Footer styling */
+.bg_dark {
+    --bs-bg-opacity: 1;
+    background-color: rgb(40, 53, 59) !important;
 }
