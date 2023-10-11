@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     {{--   Custom style's  --}}
-    <link rel="stylesheet" href="{{  asset('css/home_styles.css') }}">
+{{--    <link rel="stylesheet" href="{{  asset('css/home_styles.css') }}">--}}
     <link rel="stylesheet" href="{{  asset('css/custom_style.css') }}">
 
     <!-- Scripts -->
@@ -96,7 +96,9 @@
                 </div>
             </div>
         </nav>
-
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
 </body>
 </html>
