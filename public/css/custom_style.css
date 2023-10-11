@@ -93,3 +93,12 @@ audio, canvas, embed, iframe, img, object, svg, video {
     --bs-bg-opacity: 1;
     background-color: rgb(40, 53, 59) !important;
 }
+
+/* validation parsely error styling*/
+.parsley-errors-list {
+    color: red;
+    padding-left: 4px;
+    list-style-type: none;
+    font-size: 12px;
+    margin-bottom: 0;
+}
