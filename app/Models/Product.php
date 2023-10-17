@@ -8,19 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
-    const CURRENCY_LIST = [
-        'USD' => '&#36;',
-        'CAD' => '&#36;',
-        'GBP' => '&#163;',
-        'EUR' => '&#8364;',
-    ];
-
     protected $fillable = [
+        'category_id',
         'slug',
         'product_name',
         'product_description',
         'sku',
-        'currency',
+        'discount',
         'price',
         'image',
         'status',
@@ -31,10 +25,27 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    protected function currencyLogo(): Attribute
+    public function category()
     {
-        return Attribute::make(
-            get: fn () => self::CURRENCY_LIST[$this->currency],
-        );
+        return $this->belongsTo(Category::class);
+    }
+
+    public function hasDiscount(): bool
+    {
+        return $this->discount > 0;
+    }
+
+    public function getFinalPriceAttribute()
+    {
+        if ($this->hasDiscount()) {
+            return round($this->price - ($this->price * $this->discount / 100), 2);
+        }
+
+        return $this->price;
+    }
+
+    public function getProductImageAttribute()
+    {
+        return config('app.admin_panel_url') . '/' . $this->image;
     }
 }
