@@ -35,4 +35,17 @@ class ProductController extends Controller
             'related_products' => $related_products
         ]);
     }
+
+    public function allProducts()
+    {
+        $products = Product::query()
+            ->where('status', 1)
+            ->inRandomOrder()
+            ->limit(8)
+            ->get();
+
+        return view('all_products', [
+            'products' => $products
+        ]);
+    }
 }

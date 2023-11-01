@@ -87,6 +87,30 @@ audio, canvas, embed, iframe, img, object, svg, video {
     background-color: #cad2c5;
 }
 
+.card-img, .card-img-top {
+    height: 240px;
+    object-fit: contain;
+}
+
+.card-footer .btn:hover {
+    background-color: #F44336;
+    border-color: #F44336 !important;
+}
+
+/* Featured Products styling */
+.custom_title {
+    position: relative;
+}
+.custom_title:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 50px;
+    height: 2px;
+    background-color: rgb(255 45 32) !important;
+
+}
+
 
 /* Footer styling */
 .bg_dark {

@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'index'])->name('product.index');
 Route::get('product/{id}', [ProductController::class, 'show'])->name('product.show');
+// for all products view
+Route::get('/all_products', [ProductController::class, 'allProducts'])->name('product.allProducts');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
