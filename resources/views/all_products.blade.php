@@ -200,7 +200,7 @@
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row">
             <div class="col-12">
-                <h2 class="custom_title mb-5">All Products <span class="green-label px-md-2 px-1">428</span>
+                <h2 class="custom_title mb-5">All Products <span class="orange-label px-md-2 px-1">48</span>
                     <span class="text-muted">Products</span></h2>
 
             </div>

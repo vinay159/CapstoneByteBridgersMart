@@ -30,6 +30,13 @@
     font-size: 0.8rem;
     margin: 0 3px;
 }
+.orange-label {
+    background-color: #ff5722;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    margin: 0 3px;
+}
 .radio,.checkbox{
     padding: 6px 10px;
 }
@@ -153,6 +160,8 @@ div.text-muted{
 }
 span.text-muted{
     font-size: small;
+    left: -5px;
+    position: relative;
 }
 #sidebar{
     width: 25%;
