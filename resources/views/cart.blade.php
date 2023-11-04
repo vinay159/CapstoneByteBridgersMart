@@ -270,7 +270,7 @@
                                 <div class="small m-t-xs">
                                     Many desktop publishing packages and web page editors now.
                                 </div>
-                                <div class="m-t text-righ">
+                                <div class="m-t text-right">
                                     <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
                                 </div>
                             </div>
