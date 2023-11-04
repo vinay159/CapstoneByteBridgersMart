@@ -195,7 +195,7 @@
 </header>
 
 <!-- Section-->
-<section class="py-5">
+<section class="py-5 section_grey_bg">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row">
             <div class="col-12">

@@ -149,7 +149,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
@@ -176,16 +176,15 @@
 
             </ul>
             <form class="d-flex">
-                <button class="btn btn-outline-dark button_cart" type="submit">
+                <a href="{{ url('/cart') }}"  class="btn btn-outline-dark button_cart" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-light text-white ms-1 rounded-pill">0</span>
-                </button>
+                </a>
             </form>
         </div>
     </div>
 </nav>
-
 <!-- Header-->
 <header class="banner_bg py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -196,7 +195,7 @@
 </header>
 
 <!-- Section-->
-<section class="py-5">
+<section class="py-5 section_grey_bg">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row">
             <div class="col-12">

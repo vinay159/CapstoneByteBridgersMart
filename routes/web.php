@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -52,3 +53,5 @@ Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify']
 Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');

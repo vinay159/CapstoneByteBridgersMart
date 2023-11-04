@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    /*font-family: 'Poppins', sans-serif;*/
 }
 .wrapper{
     padding: 30px;
@@ -18,7 +18,7 @@
 }
 .btn{
     color: #666;
-    font-size: 0.85rem;
+    /*font-size: 0.85rem;*/
 }
 .btn:hover{
     color: #61b15a;
@@ -39,6 +39,7 @@
 }
 .radio,.checkbox{
     padding: 6px 10px;
+    background: #fff !important;
 }
 .border{
     border-radius: 12px;
@@ -125,7 +126,7 @@ label{
     background-color: #f3f3f3;
 }
 .tick input:checked ~ .check {
-    background-color: #61b15a;
+    background-color: #ff5722;
 }
 .check:after {
     content: "";
@@ -146,11 +147,11 @@ label{
     transform: rotate(45deg) scale(2);
 }
 #country{
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     border: none;
     padding: 0px 10px;
     outline: none;
-    font-weight: 900;
+    background: #fff !important;
 }
 .close{
     font-size: 1.2rem;
@@ -172,8 +173,9 @@ span.text-muted{
     cursor: pointer;
 }
 .list-group-item{
-    border: none;
-    padding: 0.3rem 0.4rem 0.3rem 0rem;
+    border: 1px solid #ccc !important;
+    margin: 1px 0;
+    padding: 0.3rem 0.4rem 0.3rem 0.4rem;
 }
 .badge-primary{
     background-color: #ff5722;

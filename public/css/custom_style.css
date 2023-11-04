@@ -2,6 +2,9 @@
     background-color: rgb(40, 53, 59) !important;
 }
 
+.section_grey_bg {
+    background: #d1d1d129;
+}
 .btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #FF7043;
@@ -35,6 +38,9 @@ ul.navbar-nav li {
     margin: 0 30px 0 0;
 }
 
+ul.navbar-nav ul.dropdown-menu.show li {
+    margin: 0px;
+}
 .w-auto {
     width: auto;
 }
@@ -80,13 +86,20 @@ audio, canvas, embed, iframe, img, object, svg, video {
 /* Home Page */
 .card {
     border-radius: 4px;
-    padding: 5px !important;
+    background-color: #fff !important;
+    box-shadow: 1px 2px 5px #ccc;
 }
 
 .banner_bg {
     background-color: #cad2c5;
 }
 
+.card-img-gallery {
+    min-height: 350px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 1px 2px 5px #ccc;
+}
 .card-img, .card-img-top {
     height: 240px;
     object-fit: contain;
