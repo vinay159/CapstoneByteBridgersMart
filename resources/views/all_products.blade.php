@@ -198,7 +198,7 @@
 <section class="py-5 section_grey_bg">
     <div class="container px-4 px-lg-5 mt-5">
         <form id="all_products_form">
-            <input type="hidden" name="category" value="" id="category">
+            <input type="hidden" name="category" value="{{ request('category') }}" id="category">
         <div class="row">
             <div class="col-12">
                 <h2 class="custom_title mb-5">All Products <span class="orange-label px-md-2 px-1">{{ $total_products }}</span>
@@ -299,6 +299,11 @@
                             @foreach($products as $product)
                                 <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
                                     <div class="card">
+                                        @if($product->hasDiscount())
+                                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                                Sale
+                                            </div>
+                                        @endif
                                         <img class="card-img-top" src="{{ $product->product_image }}" alt="...">
                                         <div class="card-body">
                                             <h6 class="font-weight-bold pt-3 pb-2">{{ $product->product_name }}</h6>
