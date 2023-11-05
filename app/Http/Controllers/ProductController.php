@@ -76,24 +76,12 @@ class ProductController extends Controller
             ->withCount([
                 'products' => function ($query) use ($request) {
                     $query->where('status', 1)
-                        ->when($request->input('filter_order', 'cheapest'), function ($query, $filter_order) {
-                            if ($filter_order == 'cheapest') {
-                                return $query->orderBy('price', 'asc');
-                            } elseif ($filter_order == 'most_popular') {
-                                return $query->orderBy('created_at', 'desc');
-                            }
-
-                            return $query;
-                        })
                         ->when($request->input('on_sale_products'), function ($query, $on_sale_products) {
                             if ($on_sale_products == '1') {
                                 return $query->where('discount', '>', 0);
                             }
 
                             return $query;
-                        })
-                        ->when($request->input('category'), function ($query, $category_id) {
-                            return $query->where('category_id', $category_id);
                         });
                 },
             ])
