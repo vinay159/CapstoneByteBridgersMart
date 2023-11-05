@@ -213,7 +213,7 @@
                         </div>
                         @endif
                         <!-- Product image-->
-                        <img class="card-img-top" src="{{ $product->product_image }}"
+                        <img class="card-img-top fp_img" src="{{ $product->product_image }}"
                              alt="..."/>
                         {{--                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />--}}
                         <!-- Product details-->

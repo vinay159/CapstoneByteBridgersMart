@@ -281,6 +281,24 @@ img{
     color: #ffffff;
     border-color: #ff5722 !important;
 }
+.load_more {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.load_more_btn {
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 16px;
+    border: 1px solid;
+}
+
+.load_more_btn:hover {
+    border: 1px solid #000;
+    background-color: #ffffff;
+    color: #000000;
+}
 
 @media(min-width:992px){
     .filter,#mobile-filter{
