@@ -227,7 +227,10 @@
 {{--                </div>--}}
             </div>
 
-            <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fas fa-filter"></span></button> </div>
+            <div class="filters">
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fas fa-filter"></span>
+                </button>
+            </div>
             <div id="mobile-filter">
                 <div class="py-3">
                     <h5 class="font-weight-bold">Categories</h5>
@@ -304,7 +307,7 @@
                                                 Sale
                                             </div>
                                         @endif
-                                        <img class="card-img-top" src="{{ $product->product_image }}" alt="...">
+                                        <img class="card-img-top fp_img" src="{{ $product->product_image }}" alt="...">
                                         <div class="card-body">
                                             <h6 class="font-weight-bold pt-3 pb-2">{{ $product->product_name }}</h6>
                                             <div class="text-muted description">{{ $product->product_description }}</div>
@@ -324,6 +327,11 @@
                                     </div>
                                 </div>
                             @endforeach
+                            <div class="col-12 mt-5">
+                                <div class="load_more">
+                                    <a href="javascript:;" class="load_more_btn">Load More</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
