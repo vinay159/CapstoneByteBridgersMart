@@ -20,6 +20,12 @@ class Product extends Model
         'status',
     ];
 
+    protected $appends = [
+        'product_image',
+        'final_price',
+        'has_discount',
+    ];
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);
@@ -33,6 +39,11 @@ class Product extends Model
     public function hasDiscount(): bool
     {
         return $this->discount > 0;
+    }
+
+    public function getHasDiscountAttribute()
+    {
+        return $this->hasDiscount();
     }
 
     public function getFinalPriceAttribute()

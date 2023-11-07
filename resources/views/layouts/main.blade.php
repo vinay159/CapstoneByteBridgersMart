@@ -78,11 +78,11 @@
                     @endguest
                 @endif
             </ul>
-            <form class="d-flex" action="{{ route('cart') }}">
+            <form class="d-flex" action="{{ route('cart.index') }}">
                 <button class="btn btn-outline-dark button_cart" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-light text-white ms-1 rounded-pill">0</span>
+                    <span class="badge bg-light text-white ms-1 rounded-pill">{{  app()->make(\App\Services\CartService::class)->getCartCount() }}</span>
                 </button>
             </form>
         </div>

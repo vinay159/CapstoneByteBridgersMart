@@ -54,4 +54,6 @@ Route::post('email/resend', [VerificationController::class, 'resend'])->name('ve
 
 Route::get('/home', [ProductController::class, 'index'])->name('home');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::delete('/cart', [CartController::class, 'delete'])->name('cart.delete');

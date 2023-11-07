@@ -15,6 +15,7 @@
 <!-- Product section-->
 <section class="py-5 section_grey_bg">
     <div class="container px-4 px-lg-5 my-5">
+
         <div class="row gx-4 gx-lg-5 align-items-center">
 {{--            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>--}}
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ $product->product_image }}" alt="..." /></div>
@@ -29,8 +30,16 @@
                 </div>
                 <p class="lead">{{ $product->product_description }}</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    <form action="{{ route('cart.store') }}" method="post" id="cart-form">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="price" value="{{ $product->final_price }}">
+                        <input class="form-control text-center me-3" id="quantity" name="quantity" type="number"
+                               value="1"
+                               style="max-width: 3rem"/>
+                    </form>
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button"  onclick="event.preventDefault();
+                                                     document.getElementById('cart-form').submit();">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>

@@ -14,206 +14,63 @@
                 <div class="col-md-9">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <span class="pull-right">(<strong>5</strong>) items</span>
+                            <span class="pull-right">(<strong>{{ $cart_count }}</strong>) items</span>
                             <h5>Items in your cart</h5>
                         </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation"></div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    Desktop publishing software
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                It is a long established fact that a reader will be distracted by the readable
-                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <div class="m-t-sm">
-                                                <a href="#" class="add_coupon_btn"><i class="fa fa-gift"></i> Add gift package</a>
-                                                <a href="#" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $180,00
-                                            <s class="small text-muted">$230,00</s>
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $180,00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                        @php($final_price = 0)
+                        @foreach($cart_data as $cart)
+                            @php($product = $products[$cart['product_id']])
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table shoping-cart-table">
+                                        <tbody>
+                                        <tr>
+                                            <td width="90">
+                                                <div class="cart-product-imitation"></div>
+                                            </td>
+                                            <td class="desc">
+                                                <h3>
+                                                    <a href="#" class="text-navy">
+                                                        {{ $product['product_name'] }}
+                                                    </a>
+                                                </h3>
+                                                <p class="small">{{ $product['product_description'] }}</p>
+                                                <form action="{{ route('cart.delete') }}" method="post" id="card_delete_{{$product['id']}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="product_id" value="{{ $product['id'] }}">
+                                                </form>
+                                                <div class="m-t-sm">
+{{--                                                    <a href="#" class="add_coupon_btn"><i class="fa fa-gift"></i> Add gift package</a>--}}
+                                                    <a href="#" onclick="event.preventDefault();
+                                                     document.getElementById('card_delete_{{$product['id']}}').submit();" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                &#36;{{ $product['final_price'] }}
+                                                @if($product['has_discount'])
+                                                    <s class="small text-muted">&#36;{{ $product['price'] }}</s>
+                                                @endif
+                                            </td>
+                                            <td width="65">
+                                                <input type="text" class="form-control" placeholder="{{ $cart['quantity'] }}">
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    @php($product_price = $product['final_price'] * $cart['quantity'])
+                                                    &#36;{{ $product_price }}
+                                                    @php($final_price += $product_price)
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation"></div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    Text editor
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                There are many variations of passages of Lorem Ipsum available
-                                            </p>
-                                            <div class="m-t-sm">
-                                                <a href="#" class="add_coupon_btn"><i class="fa fa-gift"></i> Add gift package</a>
-                                                <a href="#" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $50,00
-                                            <s class="small text-muted">$63,00</s>
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="2">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $100,00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation"></div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    CRM software
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                Distracted by the readable
-                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <div class="m-t-sm">
-                                                <a href="#" class="add_coupon_btn"><i class="fa fa-gift"></i> Add gift package</a>
-                                                <a href="#" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $110,00
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $110,00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation"></div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    PM software
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                Readable content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <div class="m-t-sm">
-                                                <a href="#" class="add_coupon_btn"><i class="fa fa-gift"></i> Add gift package</a>
-                                                <a href="#" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $130,00
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $130,00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation"></div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    Photo editor
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                Page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <div class="m-t-sm">
-                                                <a href="#" class="add_coupon_btn"><i class="fa fa-gift"></i> Add gift package</a>
-                                                <a href="#" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $700,00
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $70,00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="ibox-content">
                             <button class="btn btn-warning pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
-                            <button class="btn btn-light"><i class="fa fa-arrow-left"></i> Continue shopping</button>
+                            <a href="{{ url('/') }}" class="btn btn-light"><i class="fa fa-arrow-left"></i> Continue shopping</a>
                         </div>
                     </div>
                 </div>
@@ -227,7 +84,7 @@
                                 Total
                                 </span>
                             <h2 class="font-bold">
-                                $390,00
+                                &#36;{{$final_price}}
                             </h2>
                             <hr>
                             <span class="text-muted small">
