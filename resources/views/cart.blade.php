@@ -1,10 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.main')
+
+@section('styles')
+    <link rel="stylesheet" href="{{  asset('css/cart.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') }}">
+@endsection
 
 @section('content')
 
     {{--   Custom style's  --}}
-    <link rel="stylesheet" href="{{  asset('css/cart.css') }}">
-    <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') }}">
     <div class="container">
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -280,6 +283,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection
