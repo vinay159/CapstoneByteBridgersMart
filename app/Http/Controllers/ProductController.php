@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
         $products = Product::query()
             ->where('status', 1)
-            ->inRandomOrder()
+            ->latest()
             ->limit(8)
             ->get();
 
@@ -28,7 +28,7 @@ class ProductController extends Controller
         $related_products = Product::query()
             ->where('id', '!=', $id)
             ->where('status', 1)
-            ->inRandomOrder()
+            ->latest()
             ->limit(4)
             ->get();
 
