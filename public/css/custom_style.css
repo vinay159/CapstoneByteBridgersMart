@@ -138,3 +138,7 @@ audio, canvas, embed, iframe, img, object, svg, video {
     font-size: 12px;
     margin-bottom: 0;
 }
+
+.hide {
+    display: none;
+}
