@@ -8,7 +8,7 @@
 @section('content')
 
     {{--   Custom style's  --}}
-    <div class="container">
+    <div class="container px-4 px-lg-5 mt-5">
         <div class="wrapper wrapper-content animated fadeInRight mt-5">
             <div class="row">
                 <div class="col-md-9">
