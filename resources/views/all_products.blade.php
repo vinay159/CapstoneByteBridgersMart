@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <div class="col-12 mt-5">
+                            <div class="col-12 mt-5 hide">
                                 <div class="load_more">
                                     <a href="javascript:;" class="load_more_btn">Load More</a>
                                 </div>

@@ -10,10 +10,10 @@ h3 {
 }
 .cart-product-imitation {
     text-align: center;
-    padding-top: 30px;
-    height: 80px;
+    height: 100%;
     width: 80px;
-    background-color: #f8f8f9;
+    border: 1px solid #ededed;
+    border-radius: 2px;
 }
 .product-imitation.xl {
     padding: 120px 0;
@@ -46,7 +46,11 @@ table.shoping-cart-table tr td:first-child {
     text-align: left;
 }
 table.shoping-cart-table tr td:last-child {
-    width: 80px;
+    width: 170px;
+}
+.custom_p {
+    font-size: medium;
+    margin-bottom: 5px;
 }
 .ibox {
     clear: both;
@@ -70,7 +74,7 @@ table.shoping-cart-table tr td:last-child {
     border-color: #e7eaec;
     border-image: none;
     border-style: solid solid none;
-    border-width: 3px 0 0;
+    border-width: 0;
     color: inherit;
     margin-bottom: 0;
     padding: 14px 15px 7px;
@@ -85,6 +89,38 @@ table.shoping-cart-table tr td:last-child {
     border-style: solid solid none;
     border-width: 1px 0;
 }
+.cart_pimg {
+
+}
+.sale_off {
+    background-color: #CC0C39;
+    color: #fff;
+    padding: 4px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.deal_txt {
+    color: #CC0C39;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.label_tag {
+    font-weight: bold;
+    font-size: 14px;
+}
+.custom_input_qty {
+    display: inline-block;
+    width: 30px;
+    margin: 0 5px;
+    padding: 0;
+    text-align: center;
+}
+
+.qty_label {
+    display: inline-block;
+}
+
 .ibox-footer {
     color: inherit;
     border-top: 1px solid #e7eaec;
@@ -111,15 +147,58 @@ a.add_coupon_btn {
 
 
 a.remove_product_btn {
-    background-color: #F44336;
-    color: #fff !important;
-    margin-left: 10px;
-    padding: 10px;
-    border-radius: 4px;
+    color: #007185;
+    margin-left: 0;
+    padding: 0 0 0 10px;
+    border-radius: 0;
     font-size: 0.9rem;
+    font-weight: 400;
+    border-left: 1px solid grey;
+}
+
+.see_more {
+    color: #007185;
+    margin-left: 0;
+    padding: 0 0 0 10px;
+    border-radius: 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    border-left: 1px solid grey;
+}
+
+.see_more:hover {
+    color: #007185;
+    text-decoration: underline;
+}
+
+a.remove_product_btn:hover {
+    color: #F44336;
+    text-decoration: underline;
 }
 
 .btn-theme-checkout {
     background-color: #F44336;
     color: #fff;
+}
+
+
+/* table css */
+.cart_table.table {
+    width: 100%;
+    min-height: 252px;
+}
+.ellipsis {
+    position: relative;
+}
+.ellipsis:before {
+    content: ' ';
+    visibility: hidden;
+}
+.ellipsis p.small span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
