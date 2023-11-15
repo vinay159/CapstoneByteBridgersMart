@@ -49,6 +49,16 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        if ($user->status != 1) {
+            $this->guard()->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+
+            return redirect('/login')->with('error', 'Your account is not active. Please contact administrator.');
+        }
+
         app()->make(CartService::class)->mergeCart($user->id);
     }
 }
