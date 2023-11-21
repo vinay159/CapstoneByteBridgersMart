@@ -61,5 +61,6 @@ Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart', [CartController::class, 'delete'])->name('cart.delete');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
-Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');

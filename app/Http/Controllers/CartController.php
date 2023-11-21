@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 
@@ -25,27 +24,9 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-        $cart_data = $this->cartService->getCart();
+        $data = $this->cartService->getCartProducts();
 
-        $cart_count = $cart_data->count();
-
-        $products = [];
-
-        if ($cart_count > 0) {
-            $product_ids = $cart_data->pluck('product_id')->toArray();
-
-            $products = Product::query()
-                ->whereIn('id', $product_ids)
-                ->get()
-                ->keyBy('id')
-                ->toArray();
-        }
-
-        return view('cart', [
-            'cart_data' => $cart_data,
-            'cart_count' => $cart_count,
-            'products' => $products,
-        ]);
+        return view('cart', $data);
     }
 
     public function store(Request $request)

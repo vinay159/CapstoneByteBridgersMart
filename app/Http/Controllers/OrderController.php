@@ -13,9 +13,8 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function show(Request $request, $id)
     {
         return view('order');
     }
-
 }
