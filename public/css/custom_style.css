@@ -142,3 +142,17 @@ audio, canvas, embed, iframe, img, object, svg, video {
 .hide {
     display: none;
 }
+
+select {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.input-group .btn {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

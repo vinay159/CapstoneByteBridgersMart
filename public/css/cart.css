@@ -181,6 +181,9 @@ a.remove_product_btn:hover {
     color: #fff;
 }
 
+.d-flex.hide {
+    display: none !important;
+}
 
 /* table css */
 .cart_table.table {

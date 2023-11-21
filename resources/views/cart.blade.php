@@ -68,7 +68,7 @@
                             </div>
                         @endforeach
                         <div class="ibox-content">
-                            <button class="btn btn-warning pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
+                            <a href="{{ route('checkout.index') }}" class="btn btn-warning pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</a>
                             <a href="{{ url('/') }}" class="btn btn-light"><i class="fa fa-arrow-left"></i> Continue shopping</a>
                         </div>
                     </div>

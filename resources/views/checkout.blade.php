@@ -41,15 +41,15 @@
                         </div>
                         <span class="text-muted">$5</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between bg-light">
-                        <div class="text-success">
-                            <h6 class="my-0">Promo code</h6>
-                            <small>EXAMPLECODE</small>
-                        </div>
-                        <span class="text-success">-$5</span>
-                    </li>
+{{--                    <li class="list-group-item d-flex justify-content-between bg-light hide">--}}
+{{--                        <div class="text-success">--}}
+{{--                            <h6 class="my-0">Promo code</h6>--}}
+{{--                            <small>EXAMPLECODE</small>--}}
+{{--                        </div>--}}
+{{--                        <span class="text-success">-$5</span>--}}
+{{--                    </li>--}}
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
+                        <span>Total</span>
                         <strong>$20</strong>
                     </li>
                 </ul>
