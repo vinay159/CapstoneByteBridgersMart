@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Auth;
 use Session;
 
@@ -86,6 +87,31 @@ class CartService
         return $this->getCart()->count();
     }
 
+    public function getCartProducts()
+    {
+        $cart_data = $this->getCart();
+
+        $cart_count = $cart_data->count();
+
+        $products = [];
+
+        if ($cart_count > 0) {
+            $product_ids = $cart_data->pluck('product_id')->toArray();
+
+            $products = Product::query()
+                ->whereIn('id', $product_ids)
+                ->get()
+                ->keyBy('id')
+                ->toArray();
+        }
+
+        return [
+            'cart_data' => $cart_data,
+            'cart_count' => $cart_count,
+            'products' => $products,
+        ];
+    }
+
     public function mergeCart($user_id)
     {
         $cart = Session::get('cart', []);
@@ -105,7 +131,7 @@ class CartService
         return true;
     }
 
-    public function emptyCart()
+    public function clearCart()
     {
         if (Auth::check()) {
             $this->cart->where('user_id', Auth::user()->id)->delete();

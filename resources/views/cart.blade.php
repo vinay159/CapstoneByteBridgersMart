@@ -49,10 +49,12 @@
 
                                             </td>
                                             <td width="100">
+                                                @if($product['has_discount'])
                                                 <p class="small deal_txt"><span class="sale_off">{{ $product['discount'] }}% OFF</span> Deal</p>
+                                                @endif
                                                 <p class="custom_p">Actual Price:
                                                     @if($product['has_discount'])
-                                                    <s class="small text-muted">&#36;{{ $product['price'] }}</s>
+                                                    <s class="small text-muted">&#36;{{ $product['price'] * $cart['quantity'] }}</s>
                                                     @endif
                                                 </p>
                                                 <h4>
@@ -68,7 +70,9 @@
                             </div>
                         @endforeach
                         <div class="ibox-content">
-                            <button class="btn btn-warning pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
+                            @if($cart_count)
+                            <a href="{{ route('checkout.index') }}" class="btn btn-warning pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</a>
+                            @endif
                             <a href="{{ url('/') }}" class="btn btn-light"><i class="fa fa-arrow-left"></i> Continue shopping</a>
                         </div>
                     </div>
@@ -89,12 +93,12 @@
                             <span class="text-muted small">
                                 *For India, France and Germany applicable sales tax will be applied
                                 </span>
-                            <div class="m-t-sm">
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
-                                    <a href="#" class="btn btn-light btn-sm"> Cancel</a>
-                                </div>
-                            </div>
+{{--                            <div class="m-t-sm">--}}
+{{--                                <div class="btn-group">--}}
+{{--                                    <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>--}}
+{{--                                    <a href="#" class="btn btn-light btn-sm"> Cancel</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                     <div class="ibox">
