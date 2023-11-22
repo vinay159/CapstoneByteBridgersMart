@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\CartService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -68,6 +69,9 @@ class CheckoutController extends Controller
             'address' => $address,
             'total_price' => $total_price,
             'final_price' => $final_price,
+            // TODO:- mock data before payment gateway integration
+            'payment_status' => 'SUCCESS',
+            'payment_date' => Carbon::now(),
         ];
 
         $order = Order::create($order);
