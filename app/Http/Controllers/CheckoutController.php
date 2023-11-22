@@ -72,6 +72,7 @@ class CheckoutController extends Controller
             // TODO:- mock data before payment gateway integration
             'payment_status' => 'SUCCESS',
             'payment_date' => Carbon::now(),
+            'status' => 'ACCEPTED',
         ];
 
         $order = Order::create($order);
