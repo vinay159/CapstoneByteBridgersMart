@@ -39,4 +39,9 @@ class OrderController extends Controller
             'order' => $order,
         ]);
     }
+
+    public function index()
+    {
+        return view('orderDetails');
+    }
 }
