@@ -39,7 +39,14 @@
                                                     <input type="hidden" name="product_id" value="{{ $product['id'] }}">
                                                 </form>
                                                 <div class="m-t-sm">
-                                                    <p class="qty_label">Qty:<input type="text" class="form-control custom_input_qty" placeholder="{{ $cart['quantity'] }}"></p>
+                                                    <p class="qty_label">Qty:
+{{--                                                        <input type="text" class="form-control custom_input_qty" placeholder="">--}}
+                                                        <select class="custom-select" id="quantity" name="quantity" required>
+                                                            <option value="">{{ $cart['quantity'] }}</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                        </select>
+                                                    </p>
                                                     <a href="#" onclick="event.preventDefault();
                                                      document.getElementById('card_delete_{{$product['id']}}').submit();" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
                                                     <a href="#" class="see_more">See more like this</a>
