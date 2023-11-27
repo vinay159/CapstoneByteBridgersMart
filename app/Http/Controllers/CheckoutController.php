@@ -7,6 +7,9 @@ use App\Models\OrderItem;
 use App\Services\CartService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Stripe\Charge;
+use Stripe\Stripe;
+use Throwable;
 
 class CheckoutController extends Controller
 {
@@ -37,6 +40,7 @@ class CheckoutController extends Controller
             'country' => 'required',
             'state' => 'required',
             'zip' => 'required',
+            'stripeToken' => 'required',
         ]);
 
         $total_price = $final_price = 0;
@@ -69,10 +73,6 @@ class CheckoutController extends Controller
             'address' => $address,
             'total_price' => $total_price,
             'final_price' => $final_price,
-            // TODO:- mock data before payment gateway integration
-            'payment_status' => 'SUCCESS',
-            'payment_date' => Carbon::now(),
-            'status' => 'ACCEPTED',
         ];
 
         $order = Order::create($order);
@@ -82,6 +82,33 @@ class CheckoutController extends Controller
 
             OrderItem::create($order_item);
         }
+
+        Stripe::setApiKey(config('constants.stripe.secret_key'));
+
+        try {
+            $charge = Charge::create([
+                'amount' => 100 * $final_price,
+                'currency' => 'cad',
+                'source' => $request->input('stripeToken'),
+                'description' => $order->order_id
+            ]);
+
+            $order->payment_id = $charge->id;
+
+            if ($charge->status == Charge::STATUS_SUCCEEDED) {
+                $order->payment_status = 'SUCCESS';
+                $order->payment_date = Carbon::now();
+                $order->status = 'ACCEPTED';
+            } elseif ($charge->status == Charge::STATUS_PENDING) {
+                $order->payment_status = 'IN_PROCESS';
+            } else {
+                $order->payment_status = 'FAILED';
+            }
+        } catch (Throwable $throwable) {
+            $order->payment_status = 'FAILED';
+        }
+
+        $order->save();
 
         $this->cartService->clearCart();
 

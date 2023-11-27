@@ -64,4 +64,5 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
+Route::patch('order/{id}', [OrderController::class, 'update'])->name('order.update');
 Route::get('/order-GetDetails', [OrderController::class, 'index'])->name('order.index');
