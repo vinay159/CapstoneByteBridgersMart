@@ -35,8 +35,11 @@
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="price" value="{{ $product->final_price }}">
                         <select class="custom-select select_qty" id="quantity" name="quantity" required>
-                            <option value="">Quantity</option>
-                            <option>1</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
                     </form>
                     <button class="btn btn-outline-dark flex-shrink-0" type="button"  onclick="event.preventDefault();

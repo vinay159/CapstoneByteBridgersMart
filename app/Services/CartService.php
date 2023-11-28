@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Cart;
 use App\Models\Product;
 use Auth;
+use Exception;
 use Session;
 
 class CartService
@@ -14,6 +15,9 @@ class CartService
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function addToCart($product_id, $quantity, $price)
     {
         $cart_data = [
@@ -29,6 +33,11 @@ class CartService
         if (Auth::check()) {
             if ($cart_product) {
                 $cart_product->quantity += $quantity;
+
+                if ($cart_product->quantity > 5) {
+                    throw new Exception('You can not add more than 5 quantity of same product.');
+                }
+
                 $cart_product->price = $price;
                 $cart_product->save();
             } else {
@@ -41,9 +50,50 @@ class CartService
 
             if ($cart_product) {
                 $cart[$product_id]['quantity'] += $quantity;
+
+                if ($cart[$product_id]['quantity'] > 5) {
+                    throw new Exception('You can not add more than 5 quantity of same product.');
+                }
+
                 $cart[$product_id]['price'] += $quantity;
             } else {
                 $cart[$product_id] = $cart_data;
+            }
+
+            Session::put('cart', $cart);
+        }
+
+        return true;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function updateCart($product_id, $quantity): bool
+    {
+        $cart = $this->getCart();
+
+        $cart_product = $cart->where('product_id', $product_id)->first();
+
+        if (Auth::check()) {
+            if ($cart_product) {
+                $cart_product->quantity = $quantity;
+
+                if ($cart_product->quantity > 5) {
+                    throw new Exception('You can not add more than 5 quantity of same product.');
+                }
+
+                $cart_product->save();
+            }
+        } else {
+            $cart = $cart->toArray();
+
+            if ($cart_product) {
+                $cart[$product_id]['quantity'] = $quantity;
+
+                if ($cart[$product_id]['quantity'] > 5) {
+                    throw new Exception('You can not add more than 5 quantity of same product.');
+                }
             }
 
             Session::put('cart', $cart);

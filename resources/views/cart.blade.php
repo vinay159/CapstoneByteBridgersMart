@@ -33,20 +33,26 @@
                                             <td class="desc">
                                                 <h3>{{ $product['product_name'] }}</h3>
                                                 <p><span class="label_tag">Pattern Name</span>: Mobile</p>
-                                                <form action="{{ route('cart.delete') }}" method="post" id="card_delete_{{$product['id']}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="product_id" value="{{ $product['id'] }}">
-                                                </form>
                                                 <div class="m-t-sm">
+                                                    <form action="{{ route('cart.update', [$product['id']]) }}" method="post" id="cart_update_{{ $product['id'] }}">
+                                                    @csrf
+                                                    @method('PATCH')
                                                     <p class="qty_label">Qty:
 {{--                                                        <input type="text" class="form-control custom_input_qty" placeholder="">--}}
-                                                        <select class="custom-select" id="quantity" name="quantity" required>
-                                                            <option value="">{{ $cart['quantity'] }}</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
+                                                        <select class="custom-select" id="quantity" name="quantity" required onchange="document.getElementById('cart_update_{{$product['id']}}').submit();">
+                                                            <option {{ $cart['quantity'] == '1' ? 'selected' : '' }} value="1">1</option>
+                                                            <option {{ $cart['quantity'] == '2' ? 'selected' : '' }} value="2">2</option>
+                                                            <option {{ $cart['quantity'] == '3' ? 'selected' : '' }} value="3">3</option>
+                                                            <option {{ $cart['quantity'] == '4' ? 'selected' : '' }} value="4">4</option>
+                                                            <option {{ $cart['quantity'] == '5' ? 'selected' : '' }} value="5">5</option>
                                                         </select>
                                                     </p>
+                                                    </form>
+                                                    <form action="{{ route('cart.delete') }}" method="post" id="card_delete_{{$product['id']}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="hidden" name="product_id" value="{{ $product['id'] }}">
+                                                    </form>
                                                     <a href="#" onclick="event.preventDefault();
                                                      document.getElementById('card_delete_{{$product['id']}}').submit();" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
                                                     <a href="#" class="see_more">See more like this</a>
