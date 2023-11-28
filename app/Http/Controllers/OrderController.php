@@ -95,6 +95,6 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('orderDetails');
+        return view('yourOrder');
     }
 }
