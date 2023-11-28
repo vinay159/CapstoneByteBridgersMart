@@ -49,7 +49,9 @@
                         <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('order.index') }}">Orders</a></li>
+                @auth
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('order.index') }}">Orders</a></li>
+                @endauth
             </ul>
             <ul class="navbar-nav ms-auto">
                 @if (Route::has('login'))
