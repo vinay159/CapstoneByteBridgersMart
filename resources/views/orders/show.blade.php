@@ -139,7 +139,7 @@
                     </div>
                 </div>
                 </form>
-            @elseif($order->status == 'ACCEPTED')
+            @elseif(!empty($charge))
                 <div class="row item_wrapper">
                     <div class="col-12">
                         <h3 class="mt-4 custom_o_title">Payment Information</h3>

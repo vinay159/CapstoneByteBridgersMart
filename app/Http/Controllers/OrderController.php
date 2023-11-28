@@ -19,6 +19,17 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->with('items.product')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('orders.index', [
+            'orders' => $orders,
+        ]);
+    }
 
     /**
      * Show the application dashboard.
@@ -39,13 +50,13 @@ class OrderController extends Controller
 
         $order->load('items.product.category');
 
-        if ($order->status == 'ACCEPTED') {
+        if (!empty($order->payment_id)) {
             Stripe::setApiKey(config('constants.stripe.secret_key'));
 
             $charge = Charge::retrieve($order->payment_id);
         }
 
-        return view('order', [
+        return view('orders.show', [
             'order' => $order,
             'charge' => $charge ?? null,
         ]);
@@ -60,7 +71,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
 
         if ($order->status == 'ACCEPTED') {
-           return redirect()->back()->withErrors('Order already paid');
+            return redirect()->back()->withErrors('Order already paid');
         }
 
         Stripe::setApiKey(config('constants.stripe.secret_key'));
@@ -91,10 +102,5 @@ class OrderController extends Controller
         $order->save();
 
         return redirect()->route('order.show', [$order->id])->with('success', 'Order updated successfully.');
-    }
-
-    public function index()
-    {
-        return view('yourOrder');
     }
 }

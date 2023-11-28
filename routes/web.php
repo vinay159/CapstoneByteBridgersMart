@@ -64,6 +64,6 @@ Route::delete('/cart', [CartController::class, 'delete'])->name('cart.delete');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
+Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
 Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
 Route::patch('order/{id}', [OrderController::class, 'update'])->name('order.update');
-Route::get('/order-GetDetails', [OrderController::class, 'index'])->name('order.index');
