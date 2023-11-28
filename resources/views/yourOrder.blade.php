@@ -43,7 +43,7 @@
                                     <img src="{{ asset('img/macbook_air.jpg') }}" class="order_item_img" alt="">
                                 </div>
                                 <div class="order_inner_desc">
-                                    <p class="ob_label delivered"><img src="{{asset('img/delivery.png')}}" class="declined_icon" alt="delivery"/> Delivered</p>
+                                    <p class="ob_label delivered"><img src="{{asset('img/delivery.png')}}" class="order_common_icon" alt="delivery"/> Delivered</p>
                                     <p class="delivery_instruct">Package was left near the front door</p>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                     <img src="{{ asset('img/macbook_air.jpg') }}" class="order_item_img" alt="">
                                 </div>
                                 <div class="order_inner_desc">
-                                    <p class="ob_label declined"><img src="{{asset('img/declined.png')}}" class="declined_icon" alt="declined"/> Payment Failed</p>
+                                    <p class="ob_label declined"><img src="{{asset('img/declined.png')}}" class="order_common_icon" alt="declined"/> Payment Failed</p>
                                     <p class="delivery_instruct">Payment was failed due to some technical problems</p>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                                     <img src="{{ asset('img/macbook_air.jpg') }}" class="order_item_img" alt="">
                                 </div>
                                 <div class="order_inner_desc">
-                                    <p class="ob_label pay_progress"><img src="{{asset('img/visa_icon.svg')}}" class="declined_icon" alt="declined"/> Payment in Progress</p>
+                                    <p class="ob_label pay_progress"><img src="{{asset('img/visa_icon.svg')}}" class="order_common_icon" alt="Payment in Progress"/> Payment in Progress</p>
                                     <p class="delivery_instruct">Package will be get dispatched once payment is completed.</p>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                                     <img src="{{ asset('img/macbook_air.jpg') }}" class="order_item_img" alt="">
                                 </div>
                                 <div class="order_inner_desc">
-                                    <p class="ob_label dispatched"><img src="{{asset('img/dispatched.png')}}" class="declined_icon" alt="declined"/> Dispatched</p>
+                                    <p class="ob_label dispatched"><img src="{{asset('img/dispatched.png')}}" class="order_common_icon" alt="Dispatched"/> Dispatched</p>
                                     <p class="delivery_instruct">Package is been dispatched. Stay tune!</p>
                                 </div>
                             </div>
