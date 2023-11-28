@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\CartService;
+use Exception;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -31,9 +32,24 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $this->cartService->addToCart($request->input('product_id'), $request->input('quantity'), $request->input('price'));
+        try {
+            $this->cartService->addToCart($request->input('product_id'), $request->input('quantity'), $request->input('price'));
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
 
         return back()->with('success', 'Product added to cart successfully!');
+    }
+
+    public function update(Request $request, $product_id)
+    {
+        try {
+            $this->cartService->updateCart($product_id, $request->input('quantity'));
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
+        return back()->with('success', 'Cart updated successfully!');
     }
 
     public function delete(Request $request)

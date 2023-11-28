@@ -34,9 +34,13 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="price" value="{{ $product->final_price }}">
-                        <input class="form-control text-center me-3" id="quantity" name="quantity" type="number"
-                               value="1"
-                               style="max-width: 3rem"/>
+                        <select class="custom-select select_qty" id="quantity" name="quantity" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </form>
                     <button class="btn btn-outline-dark flex-shrink-0" type="button"  onclick="event.preventDefault();
                                                      document.getElementById('cart-form').submit();">

@@ -3,6 +3,7 @@
 @section('styles')
     <link rel="stylesheet" href="{{  asset('css/checkout.css') }}">
     <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') }}">
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 @endsection
 
 @section('content')
@@ -33,31 +34,15 @@
                         @php($final_price += $product_price)
                     </li>
                     @endforeach
-{{--                    <li class="list-group-item d-flex justify-content-between bg-light hide">--}}
-{{--                        <div class="text-success">--}}
-{{--                            <h6 class="my-0">Promo code</h6>--}}
-{{--                            <small>EXAMPLECODE</small>--}}
-{{--                        </div>--}}
-{{--                        <span class="text-success">-$5</span>--}}
-{{--                    </li>--}}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total</span>
                         <strong>&#36;{{ $final_price }}</strong>
                     </li>
                 </ul>
-
-{{--                <form class="card p-2">--}}
-{{--                    <div class="input-group">--}}
-{{--                        <input type="text" class="form-control" placeholder="Promo code">--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <button type="submit" class="btn btn-secondary">Redeem</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
             </div>
             <div class="col-md-7 order-md-1 custom_checkout_card mg_r_5">
                 <h4 class="mb-3">Shipping address</h4>
-                <form class="needs-validation" novalidate="" method="POST" action="{{ route('checkout.store') }}" data-parsley-validate>
+                <form class="needs-validation" id="checkout_form" novalidate="" method="POST" action="{{ route('checkout.store') }}" data-parsley-validate>
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -75,14 +60,6 @@
                             </div>
                         </div>
                     </div>
-
-{{--                    <div class="mb-3">--}}
-{{--                        <label for="email">Email <span class="text-muted">(Optional)</span></label>--}}
-{{--                        <input type="email" class="form-control" id="email" placeholder="you@example.com">--}}
-{{--                        <div class="invalid-feedback">--}}
-{{--                            Please enter a valid email address for shipping updates.--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
 
                     <div class="mb-3">
                         <label for="address">Address</label>
@@ -127,65 +104,46 @@
                         </div>
                     </div>
                     <hr class="mb-4">
-{{--                    <div class="custom-control custom-checkbox">--}}
-{{--                        <input type="checkbox" class="custom-control-input" id="same-address">--}}
-{{--                        <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>--}}
-{{--                    </div>--}}
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" name="save-info" id="save-info" value="1">
                         <label class="custom-control-label" for="save-info">Save this information for next time</label>
                     </div>
-{{--                    <hr class="mb-4">--}}
+                    <hr class="mb-4">
 
-{{--                    <h4 class="mb-3">Payment</h4>--}}
+                    <h4 class="mb-3">Payment</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="cc-number">Credit card number</label>
+                            <input type="text" class="form-control" data-parsley-type="digits" id="cc-number" placeholder="" data-parsley-trigger="change" required data-parsley-length=[16,16]>
+                            <div class="invalid-feedback">
+                                Credit card number is required
+                            </div>
+                        </div>
+                    </div>
 
-{{--                    <div class="d-block my-3">--}}
-{{--                        <div class="custom-control custom-radio">--}}
-{{--                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">--}}
-{{--                            <label class="custom-control-label" for="credit">Credit card</label>--}}
-{{--                        </div>--}}
-{{--                        <div class="custom-control custom-radio">--}}
-{{--                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">--}}
-{{--                            <label class="custom-control-label" for="debit">Debit card</label>--}}
-{{--                        </div>--}}
-{{--                        <div class="custom-control custom-radio">--}}
-{{--                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">--}}
-{{--                            <label class="custom-control-label" for="paypal">Paypal</label>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="row">--}}
-{{--                        <div class="col-md-6 mb-3">--}}
-{{--                            <label for="cc-name">Name on card</label>--}}
-{{--                            <input type="text" class="form-control" id="cc-name" placeholder="" required="">--}}
-{{--                            <small class="text-muted">Full name as displayed on card</small>--}}
-{{--                            <div class="invalid-feedback">--}}
-{{--                                Name on card is required--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6 mb-3">--}}
-{{--                            <label for="cc-number">Credit card number</label>--}}
-{{--                            <input type="text" class="form-control" id="cc-number" placeholder="" required="">--}}
-{{--                            <div class="invalid-feedback">--}}
-{{--                                Credit card number is required--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="row">--}}
-{{--                        <div class="col-md-3 mb-3">--}}
-{{--                            <label for="cc-expiration">Expiration</label>--}}
-{{--                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">--}}
-{{--                            <div class="invalid-feedback">--}}
-{{--                                Expiration date required--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-3 mb-3">--}}
-{{--                            <label for="cc-expiration">CVV</label>--}}
-{{--                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">--}}
-{{--                            <div class="invalid-feedback">--}}
-{{--                                Security code required--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="cc-expiration">Expiration Month</label>
+                            <input type="text" class="form-control" data-parsley-type="digits" id="cc-expiration-month" placeholder="" data-parsley-trigger="change" required data-parsley-length=[2,2]>
+                            <div class="invalid-feedback">
+                                Expiration date required
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="cc-expiration">Expiration Year</label>
+                            <input type="text" class="form-control" data-parsley-type="digits" id="cc-expiration-year" placeholder="" data-parsley-trigger="change" required data-parsley-length="[2, 2]">
+                            <div class="invalid-feedback">
+                                Expiration date required
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="cc-expiration">CVV</label>
+                            <input type="text" class="form-control" data-parsley-type="digits" id="cc-cvv" placeholder="" required data-parsley-trigger="change" data-parsley-length=[3,3]>
+                            <div class="invalid-feedback">
+                                Security code required
+                            </div>
+                        </div>
+                    </div>
                     <hr class="mb-4">
                     <button class="btn btn-warning pull-right" type="submit">Continue to Payment</button>
                 </form>
@@ -197,4 +155,33 @@
 @section('scripts')
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/parsley.js') }}"></script>
+    <script>
+        $(function () {
+            var $form = $("#checkout_form");
+            $('#checkout_form').bind('submit', function (e) {
+                e.preventDefault();
+                Stripe.setPublishableKey('{{ config('constants.stripe.public_key') }}');
+                Stripe.createToken({
+                    number: $('#cc-number').val(),
+                    cvc: $('#cc-cvv').val(),
+                    exp_month: $('#cc-expiration-month').val(),
+                    exp_year: $('#cc-expiration-year').val()
+                }, stripeHandleResponse);
+            });
+
+            function stripeHandleResponse(status, response) {
+                if (response.error) {
+                    $('.error')
+                        .removeClass('hide')
+                        .find('.alert')
+                        .text(response.error.message);
+                } else {
+                    var token = response['id'];
+                    $form.find('input[type=text]').empty();
+                    $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+                    $form.get(0).submit();
+                }
+            }
+        });
+    </script>
 @endsection

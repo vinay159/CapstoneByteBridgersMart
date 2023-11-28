@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Charge;
+use Stripe\Stripe;
+use Throwable;
 
 class OrderController extends Controller
 {
@@ -15,6 +19,17 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->with('items.product')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('orders.index', [
+            'orders' => $orders,
+        ]);
+    }
 
     /**
      * Show the application dashboard.
@@ -35,8 +50,57 @@ class OrderController extends Controller
 
         $order->load('items.product.category');
 
-        return view('order', [
+        if (!empty($order->payment_id)) {
+            Stripe::setApiKey(config('constants.stripe.secret_key'));
+
+            $charge = Charge::retrieve($order->payment_id);
+        }
+
+        return view('orders.show', [
             'order' => $order,
+            'charge' => $charge ?? null,
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'stripeToken' => 'required',
+        ]);
+
+        $order = Order::findOrFail($id);
+
+        if ($order->status == 'ACCEPTED') {
+            return redirect()->back()->withErrors('Order already paid');
+        }
+
+        Stripe::setApiKey(config('constants.stripe.secret_key'));
+
+        try {
+            $charge = Charge::create([
+                'amount' => 100 * $order->final_price,
+                'currency' => 'cad',
+                'source' => $request->input('stripeToken'),
+                'description' => $order->order_id
+            ]);
+
+            $order->payment_id = $charge->id;
+
+            if ($charge->status == Charge::STATUS_SUCCEEDED) {
+                $order->payment_status = 'SUCCESS';
+                $order->payment_date = Carbon::now();
+                $order->status = 'ACCEPTED';
+            } elseif ($charge->status == Charge::STATUS_PENDING) {
+                $order->payment_status = 'IN_PROCESS';
+            } else {
+                $order->payment_status = 'FAILED';
+            }
+        } catch (Throwable $throwable) {
+            $order->payment_status = 'FAILED';
+        }
+
+        $order->save();
+
+        return redirect()->route('order.show', [$order->id])->with('success', 'Order updated successfully.');
     }
 }

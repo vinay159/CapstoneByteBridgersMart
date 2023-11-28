@@ -156,3 +156,8 @@ select {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+.select_qty {
+    margin-right: 15px;
+    cursor: pointer;
+}

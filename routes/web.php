@@ -58,9 +58,12 @@ Route::get('/home', [ProductController::class, 'index'])->name('home');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart', [CartController::class, 'delete'])->name('cart.delete');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
+Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
 Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
+Route::patch('order/{id}', [OrderController::class, 'update'])->name('order.update');
