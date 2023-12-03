@@ -52,6 +52,45 @@
         </div>
     </div>
 </section>
+
+<section>
+    <div class="container px-4 px-lg-5 mt-5 mb-5">
+        <div class="row">
+            {{-- Review Section --}}
+            <form id="review-form" action="index.html" method="post">
+                <h2>Write Your Review</h2>
+                <div id="rating">
+                    <svg class="star" id="1" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="2" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="3" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="4" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="5" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #808080;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                </div>
+                <span id="starsInfo" class="help-block">
+                        Click on a star to change your rating 1 - 5, where 5 = great! and 1 = really bad
+                    </span>
+                <div class="form-group">
+                    <label class="control-label" for="review">Your Review:</label>
+                    <textarea class="form-control" rows="3" placeholder="Your Reivew" name="review" id="review"></textarea>
+                    <span id="reviewInfo" class="help-block pull-right">
+                          <span id="remaining">999</span> Characters remaining
+                        </span>
+                </div>
+                <a href="#" id="submit" class="btn btn-primary">Submit</a>
+            </form>
+        </div>
+    </div>
+</section>
 <!-- Related items section-->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
@@ -101,4 +140,6 @@
     </div>
 </section>
 
+    {{--  Star review js added  --}}
+    <script src="{{  asset('js/star_review.js') }}"></script>
 @endsection

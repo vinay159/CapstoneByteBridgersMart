@@ -310,6 +310,7 @@ img{
     color: #fff !important;
 }
 
+
 @media(min-width:992px){
     .filter,#mobile-filter{
         display: none;
