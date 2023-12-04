@@ -61,46 +61,12 @@ review.addEventListener('input', function(e) {
     remaining.innerHTML = (999-e.target.value.length);
 })
 
-var form = document.getElementById("review-form")
+var form = document.getElementById("review-form");
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    let post = {
-        stars: state.starsSet,
-        review: form['review'].value,
-        name: form['name'].value,
-        city: form['city'].value,
-        email: form['email'].value
-    }
-
-    console.log(post)
+document.getElementById('review-form-submit').addEventListener('click', function(e) {
+    document.getElementById('stars').value = state.starsSet;
+    form.submit();
 })
-
-document.getElementById('submit').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('submitForm').click();
-})
-
-var reviews = {
-    reviews: [
-        {
-            stars: 3,
-            name: 'bob',
-            city: 'Noosk',
-            review: '1 Thompson Greenspon is so grateful to have worked with CPASiteSolutions on our'
-        },{
-            stars: 4,
-            name: 'bobbo',
-            city: 'WinNoosk',
-            review: '2 Thompson Greenspon is so grateful to have worked with CPASiteSolutions on our'
-        },{
-            stars: 2,
-            name: 'bobster',
-            city: 'NooSKI',
-            review: '3 Thompson Greenspon is so grateful to have worked with CPASiteSolutions on our'
-        },
-    ]
-}
 
 function ReviewStarContainer(stars) {
     var div = document.createElement('div');
@@ -122,11 +88,11 @@ function ReviewStarContainer(stars) {
     return div;
 }
 
-function ReviewContentContainer(name, city, review) {
+function ReviewContentContainer(name, review) {
 
     var reviewee = document.createElement('div');
     reviewee.className = "reviewee footer";
-    reviewee.innerHTML  = '- ' + name + ', ' + city
+    reviewee.innerHTML  = '- ' + name
 
     var comment = document.createElement('p');
     comment.innerHTML = review;
@@ -143,10 +109,12 @@ function ReviewsContainer(review) {
     var div = document.createElement('blockquote');
     div.className = "review";
     div.appendChild(ReviewStarContainer(review.stars));
-    div.appendChild(ReviewContentContainer(review.name,review.city,review.review));
+    div.appendChild(ReviewContentContainer(review.name,review.review));
     return div;
 }
 
-for(var i = 0; i < reviews.reviews.length; i++) {
-    document.getElementById('review-container').appendChild(ReviewsContainer(reviews.reviews[i]))
+for(var i = 0; i < reviews.length; i++) {
+    document.getElementById('review-container').appendChild(ReviewsContainer(reviews[i]))
 }
+
+render(existing_stars);

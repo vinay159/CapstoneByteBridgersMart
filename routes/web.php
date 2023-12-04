@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'index'])->name('product.index');
 Route::get('product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::patch('product/{id}', [ProductController::class, 'update'])->name('product.update');
 // for all products view
 Route::get('/all_products', [ProductController::class, 'allProducts'])->name('product.allProducts');
 

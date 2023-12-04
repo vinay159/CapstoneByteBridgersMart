@@ -57,7 +57,9 @@
     <div class="container px-4 px-lg-5 mt-5 mb-5">
         <div class="row">
             {{-- Review Section --}}
-            <form id="review-form" action="index.html" method="post">
+            <form id="review-form" action="{{ route('product.update', [$product->id]) }}" method="post">
+                @csrf
+                @method('PATCH')
                 <h2>Write Your Review</h2>
                 <div id="rating">
                     <svg class="star" id="1" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
@@ -81,15 +83,17 @@
                     </span>
                 <div class="form-group">
                     <label class="control-label" for="review">Your Review:</label>
-                    <textarea class="form-control" rows="3" placeholder="Your Reivew" name="review" id="review"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Your Reivew" name="review" id="review">{{ $existing_review->review ?? null }}</textarea>
                     <span id="reviewInfo" class="help-block pull-right">
                           <span id="remaining">999</span> Characters remaining
                         </span>
                 </div>
-                <a href="#" id="submit" class="btn btn-primary">Submit</a>
+                <input type="hidden" name="stars" id="stars">
+                <button type="button" id="review-form-submit" class="btn btn-primary">{{ $existing_review ? 'Update' : 'Submit' }}</button>
             </form>
         </div>
     </div>
+    <div class="container  px-4 px-lg-5 mt-5 mb-5" id="review-container"></div>
 </section>
 <!-- Related items section-->
 <section class="py-5 bg-light">
@@ -113,11 +117,13 @@
                                 <h5 class="fw-bolder">{{ $related_product->product_name }}</h5>
                                 <!-- Product reviews-->
                                 <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
+                                    @for($i = 1 ; $i <= 5;$i++)
+                                        @if($i <= $related_product->reviews_avg_stars)
+                                            <div class="bi-star-fill"></div>
+                                        @else
+                                            <div class="bi-star"></div>
+                                        @endif
+                                    @endfor
                                 </div>
                                 <!-- Product price-->
                                 @if ($related_product->hasDiscount())
@@ -141,5 +147,10 @@
 </section>
 
     {{--  Star review js added  --}}
-    <script src="{{  asset('js/star_review.js') }}"></script>
+<script>
+    var reviews = JSON.parse('{!! json_encode($product_review_data) !!}');
+    var existing_stars = parseInt('{{ $existing_review->stars ?? 4 }}');
+    console.log(existing_stars);
+</script>
+<script src="{{  asset('js/star_review.js') }}"></script>
 @endsection
