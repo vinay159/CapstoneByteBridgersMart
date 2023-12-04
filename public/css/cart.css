@@ -205,3 +205,8 @@ a.remove_product_btn:hover {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+.display_inline_b {
+    display: inline-block;
+}

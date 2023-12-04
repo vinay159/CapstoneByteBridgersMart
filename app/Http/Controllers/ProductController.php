@@ -8,10 +8,17 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['update']);
+    }
+
+
     public function index()
     {
         $products = Product::query()
             ->where('status', 1)
+            ->withAvg('reviews', 'stars')
             ->latest()
             ->limit(8)
             ->get();
@@ -28,13 +35,50 @@ class ProductController extends Controller
         $related_products = Product::query()
             ->where('id', '!=', $id)
             ->where('status', 1)
+            ->withAvg('reviews', 'stars')
             ->latest()
             ->limit(4)
             ->get();
 
+        $existing_review = null;
+
+        if (auth()->check()) {
+            $existing_review = $product->reviews()->where('user_id', auth()->user()->id)->first();
+        }
+
+        $product_reviews = $product->reviews()
+            ->select([
+                'user_id',
+                'stars',
+                'review',
+            ])->with(['user' => function ($user) {
+                $user->select([
+                    'id',
+                    'name'
+                ]);
+            }])
+            ->latest()
+            ->when($existing_review, function ($query, $existing_review) {
+                return $query->where('id', '!=', $existing_review->id);
+            })
+            ->limit(3)
+            ->get();
+
+        $product_review_data = [];
+
+        foreach ($product_reviews as $product_review) {
+            $product_review_data[] = [
+                'name' => $product_review->user->name,
+                'stars' => $product_review->stars,
+                'review' => $product_review->review,
+            ];
+        }
+
         return view('product', [
             'product' => $product,
-            'related_products' => $related_products
+            'related_products' => $related_products,
+            'existing_review' => $existing_review,
+            'product_review_data' => $product_review_data,
         ]);
     }
 
@@ -95,5 +139,40 @@ class ProductController extends Controller
             'total_products' => $total_products,
             'on_sale_products' => $on_sale_products,
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'stars' => 'required',
+            'review' => 'required',
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        if (is_null($product)) {
+            return back()->with('error', 'Product not found!');
+        }
+
+        $user_id = auth()->user()->id;
+
+        $existing_review = $product->reviews()->where('user_id', $user_id)->first();
+
+        if ($existing_review) {
+            $existing_review->update([
+                'stars' => $request->input('stars'),
+                'review' => $request->input('review'),
+            ]);
+
+            return back()->with('success', 'Review updated successfully!');
+        }
+
+        $product->reviews()->create([
+            'user_id' => $user_id,
+            'stars' => $request->input('stars'),
+            'review' => $request->input('review'),
+        ]);
+
+        return back()->with('success', 'Review updated successfully!');
     }
 }

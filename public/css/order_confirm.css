@@ -22,6 +22,14 @@ body {
     padding: 20px 0 10px;
 }
 
+.custom_itm_ordered.order_confirm_pg {
+    padding: 20px 30px 10px;
+}
+
+.order_confirm_pg .item_img {
+    width: 150px;
+    height: auto;
+}
 .custom_disc_block {
     border-top: 2px solid #cecece;
     padding-top: 20px;

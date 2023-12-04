@@ -41,11 +41,13 @@
                                     <h5 class="fw-bolder">{{ $product->product_name }}</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
+                                        @for($i = 1 ; $i <= 5;$i++)
+                                            @if($i <= $product->reviews_avg_stars)
+                                                <div class="bi-star-fill"></div>
+                                            @else
+                                                <div class="bi-star"></div>
+                                            @endif
+                                        @endfor
                                     </div>
                                     @if ($product->hasDiscount())
                                         <span

@@ -56,7 +56,7 @@
                 </div>
                 {{-- Products Block --}}
                 @foreach($order->items as $items)
-                <div class="d-flex flex-wrap custom_itm_ordered">
+                <div class="d-flex flex-wrap custom_itm_ordered order_confirm_pg">
                     <div class="items_img">
                         <img src="{{ $items->product->product_image }}" class="item_img" alt="">
                     </div>

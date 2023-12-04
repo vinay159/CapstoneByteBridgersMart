@@ -79,7 +79,7 @@
                             <label for="country">Country</label>
                             <select class="custom-select d-block w-100" id="country" name="country" required>
                                 <option value="">Choose...</option>
-                                <option>United States</option>
+                                <option>Canada</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid country.
@@ -89,7 +89,14 @@
                             <label for="state">State</label>
                             <select class="custom-select d-block w-100" id="state" name="state" required>
                                 <option value="">Choose...</option>
-                                <option>California</option>
+                                <option>Alberta</option>
+                                <option>British Columbia</option>
+                                <option>Ontario</option>
+                                <option>Saskatchewan</option>
+                                <option>Manitoba</option>
+                                <option>Nova Scotia</option>
+                                <option>New Brunswick</option>
+                                <option>Quebec</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please provide a valid state.

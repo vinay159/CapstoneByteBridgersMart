@@ -34,7 +34,7 @@
                                                 <h3>{{ $product['product_name'] }}</h3>
                                                 <p><span class="label_tag">Pattern Name</span>: Mobile</p>
                                                 <div class="m-t-sm">
-                                                    <form action="{{ route('cart.update', [$product['id']]) }}" method="post" id="cart_update_{{ $product['id'] }}">
+                                                    <form class="display_inline_b" action="{{ route('cart.update', [$product['id']]) }}" method="post" id="cart_update_{{ $product['id'] }}">
                                                     @csrf
                                                     @method('PATCH')
                                                     <p class="qty_label">Qty:
@@ -48,14 +48,14 @@
                                                         </select>
                                                     </p>
                                                     </form>
-                                                    <form action="{{ route('cart.delete') }}" method="post" id="card_delete_{{$product['id']}}">
+                                                    <form class="display_inline_b" action="{{ route('cart.delete') }}" method="post" id="card_delete_{{$product['id']}}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <input type="hidden" name="product_id" value="{{ $product['id'] }}">
                                                     </form>
                                                     <a href="#" onclick="event.preventDefault();
                                                      document.getElementById('card_delete_{{$product['id']}}').submit();" class="remove_product_btn"><i class="fa fa-trash"></i> Remove item</a>
-                                                    <a href="#" class="see_more">See more like this</a>
+
                                                 </div>
                                             </td>
                                             <td width="65">

@@ -52,6 +52,49 @@
         </div>
     </div>
 </section>
+
+<section>
+    <div class="container px-4 px-lg-5 mt-5 mb-5">
+        <div class="row">
+            {{-- Review Section --}}
+            <form id="review-form" action="{{ route('product.update', [$product->id]) }}" method="post">
+                @csrf
+                @method('PATCH')
+                <h2>Write Your Review</h2>
+                <div id="rating">
+                    <svg class="star" id="1" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="2" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="3" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="4" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #f39c12;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                    <svg class="star" id="5" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" style="fill: #808080;">
+                          <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566"></polygon>
+                        </svg>
+                </div>
+                <span id="starsInfo" class="help-block">
+                        Click on a star to change your rating 1 - 5, where 5 = great! and 1 = really bad
+                    </span>
+                <div class="form-group">
+                    <label class="control-label" for="review">Your Review:</label>
+                    <textarea class="form-control" rows="3" placeholder="Your Reivew" name="review" id="review">{{ $existing_review->review ?? null }}</textarea>
+                    <span id="reviewInfo" class="help-block pull-right">
+                          <span id="remaining">999</span> Characters remaining
+                        </span>
+                </div>
+                <input type="hidden" name="stars" id="stars">
+                <button type="button" id="review-form-submit" class="btn btn-primary">{{ $existing_review ? 'Update' : 'Submit' }}</button>
+            </form>
+        </div>
+    </div>
+    <div class="container  px-4 px-lg-5 mt-5 mb-5" id="review-container"></div>
+</section>
 <!-- Related items section-->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
@@ -74,11 +117,13 @@
                                 <h5 class="fw-bolder">{{ $related_product->product_name }}</h5>
                                 <!-- Product reviews-->
                                 <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
+                                    @for($i = 1 ; $i <= 5;$i++)
+                                        @if($i <= $related_product->reviews_avg_stars)
+                                            <div class="bi-star-fill"></div>
+                                        @else
+                                            <div class="bi-star"></div>
+                                        @endif
+                                    @endfor
                                 </div>
                                 <!-- Product price-->
                                 @if ($related_product->hasDiscount())
@@ -101,4 +146,11 @@
     </div>
 </section>
 
+    {{--  Star review js added  --}}
+<script>
+    var reviews = JSON.parse('{!! json_encode($product_review_data) !!}');
+    var existing_stars = parseInt('{{ $existing_review->stars ?? 4 }}');
+    console.log(existing_stars);
+</script>
+<script src="{{  asset('js/star_review.js') }}"></script>
 @endsection

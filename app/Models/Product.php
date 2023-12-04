@@ -26,6 +26,10 @@ class Product extends Model
         'has_discount',
     ];
 
+    protected $casts = [
+        'reviews_avg_stars' => 'int',
+    ];
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);
@@ -58,5 +62,10 @@ class Product extends Model
     public function getProductImageAttribute()
     {
         return config('app.admin_panel_url') . '/' . $this->image;
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
     }
 }
