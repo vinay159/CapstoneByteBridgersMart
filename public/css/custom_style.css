@@ -204,4 +204,5 @@ blockquote .footer{
 
 .stars-container {
     margin-bottom: 5px;
+    display: inline-flex;
 }
