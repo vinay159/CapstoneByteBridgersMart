@@ -150,6 +150,7 @@ class CartService
 
             $products = Product::query()
                 ->whereIn('id', $product_ids)
+                ->with('category')
                 ->get()
                 ->keyBy('id')
                 ->toArray();
