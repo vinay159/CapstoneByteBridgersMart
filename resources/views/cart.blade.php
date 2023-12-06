@@ -32,7 +32,7 @@
                                             </td>
                                             <td class="desc">
                                                 <h3>{{ $product['product_name'] }}</h3>
-                                                <p><span class="label_tag">Category</span>: Laptop</p>
+                                                <p><span class="label_tag">Category</span>: {{ $product['category']['name'] }}</p>
                                                 <div class="m-t-sm">
                                                     <form class="display_inline_b" action="{{ route('cart.update', [$product['id']]) }}" method="post" id="cart_update_{{ $product['id'] }}">
                                                     @csrf
